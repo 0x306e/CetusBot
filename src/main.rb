@@ -12,12 +12,13 @@ bot.command :ping do |event|
   event.send('pong')
 end
 
-bot.command :etime do |event|
+bot.command :ctime do |event|
   uri = URI.parse('http://content.warframe.com/dynamic/worldState.php')
   json = Net::HTTP.get(uri)
   raw = JSON.parse(json)
-  unixTime = raw['SyndicateMissions'][9]['Expiry']['$date']['$numberLong']
-  event.send(unixTime)
+  Activation = raw['SyndicateMissions']['Activation']['$date']['numberLong']
+  Expiry = raw['SyndicateMissions'][9]['Expiry']['$date']['$numberLong']
+  event.send(Activation, Expiry)
 end
 
 bot.run
