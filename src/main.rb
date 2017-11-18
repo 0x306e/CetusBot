@@ -27,12 +27,27 @@ bot.command :ctime do |event|
   uri = URI.parse('http://content.warframe.com/dynamic/worldState.php')
   json = Net::HTTP.get(uri)
   raw = JSON.parse(json)
-  Activation = raw['SyndicateMissions'][9]['Activation']['$date']['$numberLong'].to_i
-  Expiry = raw['SyndicateMissions'][9]['Expiry']['$date']['$numberLong'].to_i
+  syndicates = raw['SyndicateMissions']
+  (0..20).each {|i|
+    if syndicates[i]['Tag'] == 'CetusSyndicate'
+      Activation = syndicates[i]['Activation']['$date']['$numberLong'].to_i
+      Expiry = syndicates[i]['Expiry']['$date']['$numberLong'].to_i
+      break
+    end
+  }
 
-  State = 'Night'
+  # parse time format
   remain = (Expiry / 1000) - unixTime
+  State = case remain
+            when 0..(50 * 60)
+              'Night'
+            else
+              'Day'
+          end
 
+  if remain < 0
+    remain += 150 * 60
+  end
   if remain > 3000
     State = 'Day'
     remain = remain - 3000
