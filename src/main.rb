@@ -59,4 +59,14 @@ bot.command :ctime do |event|
   event.send("Now in #{State}, left to #{hour}h #{minutes}m #{seconds}s.")
 end
 
+bot.command :gacha do |event|
+  j = nil
+  File.open('FrameList.json', 'r') do |f|
+    j = JSON.load(f)
+  end
+  size = j['frames'].length
+  index = Integer.rand(max=size-1)
+  event.send(j['frames'][index])
+end
+
 bot.run
