@@ -65,8 +65,8 @@ bot.command :gacha do |event|
   File.open('FrameList.json', 'r') do |f|
     j = JSON.load(f)
   end
-  size = j['frames'].length
-  index = Integer.rand(max=size-1)
+  size = j['frames'].length()
+  index = Random.new.rand(size)
   event.send(j['frames'][index])
 end
 
