@@ -17,6 +17,7 @@ bot.command :help do |event|
 Command usage
 !ping : return 'pong'
 !ctime : Display Cetus time status
+!gacha : frame gacha
 EOS
 end
 
