@@ -20,6 +20,7 @@ Command usage
 !ping : return 'pong'
 !ctime : Display Cetus time status
 !gacha : frame gacha
+!dice [max_number] : roll dice. default max_number is 6.
 EOS
 end
 
@@ -72,4 +73,11 @@ bot.command :gacha do |event|
   event.send(j['frames'][index])
 end
 
+bot.command :dice do |event, max|
+  max ||= 6
+  val = max.to_i
+  event.send(rand(1..val))
+end
+
 bot.run
+
