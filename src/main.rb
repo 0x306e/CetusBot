@@ -1,10 +1,12 @@
 require 'discordrb'
 require 'json'
 require 'net/http'
+require 'dotenv'
 
+Dotenv.load('.env')
 bot = Discordrb::Commands::CommandBot.new(
-    token: 'YOUR_TOKEN',
-    client_id: 'YOUR_ID',
+    token:     ENV['DISCORD_TOKEN'],
+    client_id: ENV['DISCORD_CLIENT_ID'],
     prefix: '!',
 )
 
