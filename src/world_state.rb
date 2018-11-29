@@ -17,6 +17,27 @@ module CetusBot
             end
         end
 
+        def events()
+        end
+
+        def alerts()
+        end
+
+        def sorties()
+        end
+
+        def syndicates()
+        end
+
+        def invasions()
+        end
+
+        def void_trader()
+        end
+
+        def void_fisshers()
+        end
+
         def eidlon_time()
             now = Time.now.to_i
             # get Cetus time
@@ -30,6 +51,9 @@ module CetusBot
             }
 
             return activation, expiry
+        end
+
+        def solaris_time()
         end
     end
 end
