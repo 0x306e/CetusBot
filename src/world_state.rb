@@ -24,6 +24,25 @@ module CetusBot
         end
 
         def sorties
+            sortie = @json['Sorties']
+            activation = sortie['Activation']['$date']['$numberLong']
+            expiry = sortie['Expiry']['$date']['$numberLong']
+            boss = sortie['Boss']
+            variants = [
+                {
+                    'missionType':  sortie['Variants'][0]['missionType'],
+                    'modifierType': sortie['Variants'][0]['modifierType'],
+                },
+                {
+                    'missionType':  sortie['Variants'][1]['missionType'],
+                    'modifierType': sortie['Variants'][1]['modifierType'],
+                },
+                {
+                    'missionType':  sortie['Variants'][2]['missionType'],
+                    'modifierType': sortie['Variants'][2]['modifierType'],
+                }
+            ]
+            return {'activation': activation, 'expiry': expiry, 'boss': boss, 'variants': variants}
         end
 
         def syndicates
