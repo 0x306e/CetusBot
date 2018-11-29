@@ -5,7 +5,7 @@ module CetusBot
         @uptime
         URL = URI.parse('http://content.warframe.com/dynamic/worldState.php')
         def initialize
-            self.uptime()
+            self.update
         end
 
         def update
