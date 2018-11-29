@@ -39,8 +39,9 @@ module CetusBot
         end
 
         def eidlon_time
-            now = Time.now.to_i
             # get Cetus time
+            activation = nil
+            expiry = nil
             syndicates = @json['SyndicateMissions']
             (0..20).each {|i|
                 if syndicates[i]['Tag'] == 'CetusSyndicate'
@@ -50,7 +51,7 @@ module CetusBot
                 end
             }
 
-            return activation, expiry
+            return {'activation': activation, 'expiry': expiry}
         end
 
         def solaris_time
