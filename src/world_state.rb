@@ -4,11 +4,11 @@ module CetusBot
         @json
         @uptime
         URL = URI.parse('http://content.warframe.com/dynamic/worldState.php')
-        def initialize()
+        def initialize
             self.uptime()
         end
 
-        def update()
+        def update
             now = Time.now
             if (now - @uptime).to_i > 60*5
                 @response = Net::HTTP.get(URL)
@@ -17,28 +17,28 @@ module CetusBot
             end
         end
 
-        def events()
+        def events
         end
 
-        def alerts()
+        def alerts
         end
 
-        def sorties()
+        def sorties
         end
 
-        def syndicates()
+        def syndicates
         end
 
-        def invasions()
+        def invasions
         end
 
-        def void_trader()
+        def void_trader
         end
 
-        def void_fisshers()
+        def void_fissures
         end
 
-        def eidlon_time()
+        def eidlon_time
             now = Time.now.to_i
             # get Cetus time
             syndicates = @json['SyndicateMissions']
@@ -53,7 +53,7 @@ module CetusBot
             return activation, expiry
         end
 
-        def solaris_time()
+        def solaris_time
         end
     end
 end

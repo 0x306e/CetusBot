@@ -6,29 +6,30 @@ module CetusBot
     class Bot
         @bot
         @state
-
-        def initialize()
-            Dotenv.load('.env')
+        def initialize
+            Dotenv.load('~/.env')
             @bot = Discordrb::Commands::CommandBot.new(
                 token:     ENV['DISCORD_TOKEN'],
                 client_id: ENV['DISCORD_CLIENT_ID'],
                 prefix: '!',
             )
             @state = CetusBot::WorldState.new
-            self.setting()
+            self.setting
         end
 
-        def run()
-            @bot.run()
+        def run
+            @bot.run
         end
 
-        def setting() # command setups
-            @bot.command :ping do |event|
-                event.respond("pong (#{Time.now - event.timeStamp}sec)")
+        def setting # command setups
+            @bot.command [:ping] do |event|
+                m = event.respond('pong')
+                m.edit("pong (#{event.timestamp - Time.now}sec)")
             end
 
             @bot.command :ctime do |event|
-                remain = @state.eidlon_time() / 1000 - Time.now.to_i
+                remain = @state.eidlon_time()[:expiry]
+                remain = remain / 1000 - Time.now.to_i
                 state = case remain
                         when 0..(50*60)
                             'Night'
