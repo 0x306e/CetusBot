@@ -10,7 +10,7 @@ module CetusBot
 
         def update
             now = Time.now
-            if (now - @uptime).to_i > 60*5
+            if @uptime.nil? || now - @uptime > 60*5
                 @response = Net::HTTP.get(URL)
                 @json = JSON.parse(@response)
                 @uptime = Time.now
