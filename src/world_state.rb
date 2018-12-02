@@ -17,6 +17,11 @@ module CetusBot
             end
         end
 
+        def json
+            self.update
+            return @json
+        end
+
         def events
         end
 
@@ -24,7 +29,7 @@ module CetusBot
         end
 
         def sorties
-            sortie = @json['Sorties']
+            sortie = self.json['Sorties'][0]
             activation = sortie['Activation']['$date']['$numberLong']
             expiry = sortie['Expiry']['$date']['$numberLong']
             boss = sortie['Boss']
@@ -61,7 +66,7 @@ module CetusBot
             # get Cetus time
             activation = nil
             expiry = nil
-            syndicates = @json['SyndicateMissions']
+            syndicates = self.json['SyndicateMissions']
             (0..20).each {|i|
                 if syndicates[i]['Tag'] == 'CetusSyndicate'
                     activation = syndicates[i]['Activation']['$date']['$numberLong'].to_i
