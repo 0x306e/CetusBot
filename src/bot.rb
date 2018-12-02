@@ -26,9 +26,9 @@ module CetusBot
         end
 
         def setting # command setups
-            @bot.command [:ping] do |event|
-                m = event.respond('pong')
-                m.edit("pong (#{event.timestamp - Time.now}sec)")
+            @bot.command :ping do |event|
+                m = event.send('pong')
+                m.edit("pong (#{Time.now - event.timestamp}sec)")
             end
 
             @bot.command :ctime do |event|
