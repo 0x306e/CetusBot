@@ -52,7 +52,7 @@ module CetusBot
                 m = (remain % 3600) / 60
                 s = remain % 60
 
-                event.respond("Now in #{state}, left to #{h}h #{m}m #{s}s.")
+                event.send("Now in #{state}, left to #{h}h #{m}m #{s}s.")
             end
 
             @bot.command :gacha do |event|
