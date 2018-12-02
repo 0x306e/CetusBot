@@ -6,6 +6,7 @@ module CetusBot
     class Bot
         @bot
         @state
+        @GACHA_JSON
         def initialize
             Dotenv.load('~/.env')
             @bot = Discordrb::Commands::CommandBot.new(
@@ -14,6 +15,9 @@ module CetusBot
                 prefix: '!',
             )
             @state = CetusBot::WorldState.new
+            @GACHA_JSON = open(File.expand_path('../src/data.json'), 'r') do |j|
+                JSON.load(j)
+            end
             self.setting
         end
 
@@ -52,13 +56,11 @@ module CetusBot
             end
 
             @bot.command :gacha do |event|
-                j = nil
-                File.open('./FrameList.json', 'r') do |f|
-                    j = JSON.load(f)
-                end
-                size = j['frames'].length()
-                index = Random.new.rand(size)
-                event.send(j['frames'][index])
+                event.send(self.rand_frame)
+            end
+
+            @bot.command :advgacha do |event|
+                event.send(self.rand_frame << ', ' << self.rand_dragon_key)
             end
 
             @bot.command :dice do |event, max|
@@ -66,6 +68,18 @@ module CetusBot
                 val = max.to_i
                 event.send(rand(1..val))
             end
+        end
+
+        def rand_frame
+            size = @GACHA_JSON['frames'].length()
+            index = Random.new.rand(size)
+            return @GACHA_JSON['frames'][index]
+        end
+
+        def rand_dragon_key
+            size = @GACHA_JSON['dragon_keys'].length()
+            index = Random.new.rand(size)
+            return @GACHA_JSON['dragon_keys'][index]
         end
     end
 end

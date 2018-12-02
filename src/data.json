@@ -37,5 +37,11 @@
   "VOLT",
   "WUKONG",
   "ZEPHYR"
+  ],
+  "dragon_keys": [
+    "BLEEDING DRAGON KEY",
+    "DECAYING DRAGON KEY",
+    "EXTINGUISHED DRAGON KEY",
+    "HOBBLED DRAGON KEY"
   ]
 }
