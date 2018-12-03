@@ -60,7 +60,7 @@ module CetusBot
             end
 
             @bot.command :advgacha do |event|
-                event.send(self.rand_frame << ', ' << self.rand_dragon_key)
+                event.send("#{self.rand_frame}, #{self.rand_dragon_key}")
             end
 
             @bot.command :dice do |event, max|
