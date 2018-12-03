@@ -1,12 +1,14 @@
+require 'singleton'
+require 'net/http'
+require 'json'
+
 module CetusBot
     class WorldState
+        include Singleton
         @response
         @json
         @uptime
         URL = URI.parse('http://content.warframe.com/dynamic/worldState.php')
-        def initialize
-            self.update
-        end
 
         def update
             now = Time.now
