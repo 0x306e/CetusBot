@@ -9,6 +9,7 @@ module CetusBot
         @json
         @uptime
         URL = URI.parse('http://content.warframe.com/dynamic/worldState.php')
+        DATA_DIR = File.expand_path('../../warframe-worldstate-data/data/', __FILE__)
 
         def update
             now = Time.now
