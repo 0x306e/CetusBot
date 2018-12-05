@@ -4,9 +4,18 @@ module CetusBot::API
 
     class SortieMission
       def initialize(variants)
-        @missionType = variants['missionType']
-        @modifierType = variants['modifierType']
-        @node = variants['node']
+        @solNodes = File.open(File.expand_path('solNodes.json', CetusBot::WorldState::DATA_DIR)) do |f|
+          JSON.load(f)
+        end
+        @missionTypes = File.open(File.expand_path('missionTypes.json', CetusBot::WorldState::DATA_DIR)) do |f|
+          JSON.load(f)
+        end
+        @sortieData = File.open(File.expand_path('sortieData.json', CetusBot::WorldState::DATA_DIR)) do |f|
+          JSON.load(f)
+        end
+        @missionType = @missionTypes[variants['missionType']]['value']
+        @modifierType = @sortieData['modifierTypes'][variants['modifierType']]
+        @node = @solNodes[variants['node']]['value']
         @tileset = variants['tileset']
       end
       attr_reader :missionType, :modifierType, :node, :tileset
