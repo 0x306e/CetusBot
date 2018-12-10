@@ -1,4 +1,4 @@
-require '../world_state'
+require_relative '../world_state'
 
 module CetusBot::API
   class Alerts
