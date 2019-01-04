@@ -11,13 +11,13 @@ module CetusBot::API
         @missionTypes = File.open(File.expand_path('missionTypes.json', CetusBot::WorldState::DATA_DIR)) do |f|
           JSON.load(f)
         end
-        @factionData = File.open(File.expand_path('factionData.json', CetusBot::WorldState::DATA_DIR)) do |f|
+        @factionData = File.open(File.expand_path('factionsData.json', CetusBot::WorldState::DATA_DIR)) do |f|
           JSON.load(f)
         end
         @activation = json['Activation']['$date']['$numberLong']
         @expiry = json['Expiry']['$date']['$numberLong']
-        @missionType = @missionTypes[json['MissionInfo']['missionType']]
-        @faction = @factionData[json['MissionInfo']['faction']]
+        @missionType = @missionTypes[json['MissionInfo']['missionType']]['value']
+        @faction = @factionData[json['MissionInfo']['faction']]['value']
         @node = @solNodes[json['MissionInfo']['location']]
         @reward = Reward.new(json['MissionInfo']['missionReward'])
       end
@@ -29,11 +29,11 @@ module CetusBot::API
     end
 
     def now_list
-      list = []
+      array = []
       @state.json['Alerts'].each {|j|
-        list.append(Alert.new(j))
+        array.push(Alert.new(j))
       }
-      return list
+      return array
     end
   end
 end

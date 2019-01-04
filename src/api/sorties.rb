@@ -1,8 +1,6 @@
 require_relative '../world_state'
 module CetusBot::API
   class Sorties
-    @state
-
     class SortieMission
       def initialize(variants)
         @solNodes = File.open(File.expand_path('solNodes.json', CetusBot::WorldState::DATA_DIR)) do |f|
