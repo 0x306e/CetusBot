@@ -1,4 +1,5 @@
 require_relative '../world_state'
+require_relative './reward'
 
 module CetusBot::API
   class Alerts
@@ -18,7 +19,7 @@ module CetusBot::API
         @missionType = @missionTypes[json['MissionInfo']['missionType']]
         @faction = @factionData[json['MissionInfo']['faction']]
         @node = @solNodes[json['MissionInfo']['location']]
-        @reward = json['MissionInfo']['MissionReward']
+        @reward = Reward.new(json['MissionInfo']['missionReward'])
       end
       attr_reader :activation, :expiry, :missionType, :faction, :node, :reward
     end
