@@ -1,4 +1,5 @@
 require_relative '../world_state'
+
 module CetusBot::API
   class Sorties
     class SortieMission
@@ -50,3 +51,4 @@ module CetusBot::API
     end
   end
 end
+
