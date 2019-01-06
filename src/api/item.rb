@@ -1,11 +1,11 @@
 require 'json'
-require_relative './LanguageJsonTranslation'
+require_relative './JsonDataGetter'
 
 module CetusBot::API
   class Item
-    include CetusBot::API::LanguageJsonTranslation
+    include CetusBot::API::JsonDataGetter
     def initialize(lang=nil, amount=nil)
-      @name = get(lang.downcase)
+      @name = getJsonData(file=JsonDataGetter::Languages, path=lang.downcase)['value']
       @amount = amount
     end
   end
