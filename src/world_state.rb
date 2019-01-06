@@ -1,6 +1,10 @@
 require 'singleton'
 require 'net/http'
 require 'json'
+require_relative 'api/alerts'
+require_relative 'api/sorties'
+require_relative 'api/syndicate_missions'
+
 
 module CetusBot
     class WorldState
@@ -26,31 +30,15 @@ module CetusBot
         end
 
         def alerts
+          CetusBot::API::Alerts.new
         end
 
         def sorties
-            sortie = self.json['Sorties'][0]
-            activation = sortie['Activation']['$date']['$numberLong']
-            expiry = sortie['Expiry']['$date']['$numberLong']
-            boss = sortie['Boss']
-            variants = [
-                {
-                    'missionType':  sortie['Variants'][0]['missionType'],
-                    'modifierType': sortie['Variants'][0]['modifierType'],
-                },
-                {
-                    'missionType':  sortie['Variants'][1]['missionType'],
-                    'modifierType': sortie['Variants'][1]['modifierType'],
-                },
-                {
-                    'missionType':  sortie['Variants'][2]['missionType'],
-                    'modifierType': sortie['Variants'][2]['modifierType'],
-                }
-            ]
-            return {'activation': activation, 'expiry': expiry, 'boss': boss, 'variants': variants}
+          CetusBot::API::Sorties.new
         end
 
         def syndicates
+          CetusBot::API::SyndicateMissions.new
         end
 
         def invasions
