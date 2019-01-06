@@ -5,9 +5,6 @@ require 'json'
 module CetusBot
     class WorldState
         include Singleton
-        @response
-        @json
-        @uptime
         URL = URI.parse('http://content.warframe.com/dynamic/worldState.php')
         DATA_DIR = File.expand_path('../../warframe-worldstate-data/data/', __FILE__)
 
